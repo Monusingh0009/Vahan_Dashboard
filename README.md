@@ -1,60 +1,61 @@
+# Vahan Investor Dashboard  
 
-# Vahan Investor Dashboard (Sample)
+An interactive dashboard built using **Streamlit** and **Python** to analyze vehicle registration data from the **Vahan Dashboard**. It is designed with an investor’s perspective, highlighting category-wise and manufacturer-wise growth trends.  
 
-A Streamlit dashboard for analyzing vehicle registrations by category (2W/3W/4W) and manufacturer, with YoY and QoQ growth—designed for investor-style analysis.
+---
 
-> **Note**: The repository ships with **synthetic sample data**. Replace `data/registrations_sample.csv` with an export from the official Vahan dashboard to analyze real trends.
+## 🚀 Setup Instructions  
 
-## Features
-- Category & manufacturer filters
-- Date range selection
-- Trend charts for registrations
-- **YoY%** and **QoQ%** growth for categories and each manufacturer
-- Clean, investor-friendly UI in Streamlit
-
-## Quickstart
+### 1. Clone the repository  
 ```bash
-# 1) Create & activate a virtualenv (optional but recommended)
-python -m venv .venv
-# Windows: .venv\Scripts\activate
-# macOS/Linux: source .venv/bin/activate
+git clone <your-repo-url>
+cd vahan_dashboard23
+```
 
-# 2) Install dependencies
+### 2. Create a virtual environment (recommended)  
+```bash
+python -m venv venv
+source venv/bin/activate    # for Mac/Linux
+venv\Scripts\activate       # for Windows
+```
+
+### 3. Install dependencies  
+```bash
 pip install -r requirements.txt
+```
 
-# 3) Run
+### 4. Run the Streamlit app  
+```bash
 streamlit run app.py
 ```
 
-### Data
-- Default file: `data/registrations_sample.csv` (synthetic).
-- To use real data, export/scrape into a CSV with columns:
-  - `date` (YYYY-MM-DD)
-  - `category` (e.g., 2W/3W/4W)
-  - `manufacturer`
-  - `registrations` (integer)
+### 5. Data Input  
+- By default, the app loads a **sample CSV** stored in `data/registrations_sample.csv`.  
+- You can replace this file with your own dataset (exported from Vahan Dashboard).  
+- Alternatively, provide the path in the sidebar input.  
 
-Point the app to your file path via the **sidebar**.
+---
 
-## How YoY and QoQ are computed
-- **YoY%**: `(Current value - Value 12 months ago) / (Value 12 months ago) * 100`
-- **QoQ%**: `(Current value - Value 3 months ago) / (Value 3 months ago) * 100`
+## 📊 Data Assumptions  
 
-These are computed separately for each category and manufacturer.
+1. **Data Source**  
+   - Data is scraped/exported from the **Vahan Dashboard**:  
+     [Vahan Reports](https://vahan.parivahan.gov.in/vahan4dashboard/vahan/view/reportview.xhtml).  
+   - Only **vehicle registrations** are considered, not renewals or deregistrations.  
 
-## Roadmap
-- ✅ Synthetic data + working dashboard
-- ☐ Selenium scraper (if legally permitted)
-- ☐ SQLite storage + scheduled refresh
-- ☐ EV vs ICE segmentation layer
-- ☐ Share of category (SoC) by manufacturer
-- ☐ Export insights to PDF/Slides
+2. **Date Handling**  
+   - The dataset includes a `date` column with daily records.  
+   - Date ranges in the dashboard are applied as filters (`start_date`, `end_date`).  
+   - For **YoY and QoQ growth**, the app calculates percentage changes based on aggregated monthly/quarterly totals.  
 
-## Video Walkthrough (to add)
-Record a short (≤5 min) screen capture explaining:
-- What the dashboard does
-- How to operate filters
-- 1–2 key investor insights (e.g., emerging momentum in 2W EV makers)
+3. **Categories**  
+   - Vehicles are grouped as **2W, 3W, 4W** based on the `category` column.  
+   - Assumes no missing category values; if missing, they are ignored.  
 
-## Legal
-Use data responsibly and review any terms/robots policy of data sources you scrape.
+4. **Manufacturers**  
+   - Manufacturer names are taken directly from the dataset.  
+   - Assumes consistent naming (e.g., “Hero” vs “Hero MotoCorp” may cause duplicate entries if not standardized).  
+
+5. **Sample Data**  
+   - The provided sample CSV is synthetic (for demonstration).  
+   - Real-world results may vary once live Vahan data is integrated.  
