@@ -56,6 +56,4 @@ streamlit run app.py
    - Manufacturer names are taken directly from the dataset.  
    - Assumes consistent naming (e.g., “Hero” vs “Hero MotoCorp” may cause duplicate entries if not standardized).  
 
-5. **Sample Data**  
-   - The provided sample CSV is synthetic (for demonstration).  
-   - Real-world results may vary once live Vahan data is integrated.  
+ 
